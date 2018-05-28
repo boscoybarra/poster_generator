@@ -72,9 +72,8 @@ def get_image(image_path, width, height, mode):
     """
     image = Image.open(image_path)
 
-    if image.size != (width, height):  # HACK - Check if image is from the CELEBA dataset
-        # Remove most pixels that aren't part of a face
-        face_width = face_height = 108
+    if image.size != (width, height):
+        face_width = face_height = 64
         j = (image.size[0] - face_width) // 2
         i = (image.size[1] - face_height) // 2
         image = image.crop([j, i, j + face_width, i + face_height])
@@ -185,8 +184,8 @@ class Dataset(object):
         """
         DATASET_CELEBA_NAME = 'celeba'
         DATASET_MNIST_NAME = 'mnist'
-        IMAGE_WIDTH = 28
-        IMAGE_HEIGHT = 28
+        IMAGE_WIDTH = 64
+        IMAGE_HEIGHT = 64
 
         if dataset_name == DATASET_CELEBA_NAME:
             self.image_mode = 'RGB'
